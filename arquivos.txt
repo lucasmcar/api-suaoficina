@@ -1,0 +1,25 @@
+
+//rotas de api
+const clienteController = require('./controller/api/ClienteController');
+const servicoController = require('./controller/api/ServicoController');
+const carroController = require('./controller/api/CarroController');
+const marcaController = require('./controller/api/MarcaController');
+
+
+//rotas web
+const clienteWebController = require('./controller/web/ClienteWebController');
+const servicoWebController = require('./controller/web/ServicoWebController');
+const carroWebController = require('./controller/web/CarroWebController');
+const marcaWebController = require('./controller/web/MarcaWebController');
+
+
+//web
+app.use('/', clienteWebController);
+app.use('/', servicoWebController);
+app.use('/', carroWebController);
+app.use('/', marcaWebController);
+
+const Servico = require('./src/model/Servico');
+const Cliente = require('./src/model/Cliente');
+const Carro = require('./src/model/Carro');
+const Marca = require('./src/model/Marca');
