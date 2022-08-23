@@ -1,4 +1,4 @@
-const Cliente = require('../../src/model/Cliente');
+const Cliente = require('../../model/Cliente');
 
 //Rota listagem de clientes
 exports.verClientes = (req, res) =>{
@@ -23,7 +23,7 @@ exports.verClientePeloId = (req, res) =>{
         res.json(cliente); 
     }).catch(err =>{
         console.log(err);
-    })
+    });
 }
 
 //cadastro novo cliente

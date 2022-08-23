@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Cliente = require('./Cliente');
+const Status = require('./Status');
 const con = require('../../config/database/database');
 
 const Servico = con.define('TB_SERVICO', {
@@ -19,13 +20,18 @@ const Servico = con.define('TB_SERVICO', {
         type: Sequelize.DECIMAL,
         allowNull: false
     },
-    dataEntrega: {
+    data_entrada :{
+        type : Sequelize.DATE,
+        allowNull : false
+    },
+    data_entrega: {
         type : Sequelize.DATE,
         allowNull: false
     }
 });
 
 Servico.belongsTo(Cliente);
+Servico.hasMany(Status);
 
 //Servico.sync({force: true});
 

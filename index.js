@@ -1,5 +1,7 @@
 const express = require('express');
-const clienteRouter = require('./routes/api/clienteApiRoutes');
+const clienteRouter = require('./src/routes/api/clienteApiRoutes');
+const servicoRouter = require('./src/routes/api/servicoApiRoutes');
+const statusRouter = require('./src/routes/api/statusApiRoutes');
 const app = express();
 const MYSQL_DB = require('./config/database/database');
 const cors = require('cors');
@@ -24,6 +26,8 @@ MYSQL_DB
     });  
 
 app.use(clienteRouter)
+app.use(servicoRouter)
+app.use(statusRouter)
 /*app.use(servicoController);
 app.use('/', carroController);
 app.use('/', marcaController);*/

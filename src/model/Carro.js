@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 
 const con = require('../../config/database/database');
 
+const Cliente = require('./Cliente')
+
 const Carro = con.define('tb_carro', {
     nome: {
         type: Sequelize.STRING,
@@ -21,6 +23,7 @@ const Carro = con.define('tb_carro', {
     },
 });
 
+Carro.belongsTo(Cliente);
 //Carro.sync({force: true});
 
 module.exports = Carro;
