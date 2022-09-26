@@ -1,2 +1,4 @@
 .todo
 node_modules/
+.vscode/
+arquivos.txt

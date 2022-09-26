@@ -12,10 +12,8 @@ const Marca = con.define('tb_marca', {
         type: Sequelize.STRING,
         allowNull: true
     },
-});
+}, {freezeTableName: true});
 
-
-Marca.hasMany(Carro);
-//Marca.sync({force: true});
+//Marca.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
 module.exports = Marca;

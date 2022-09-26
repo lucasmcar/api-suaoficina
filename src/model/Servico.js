@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
 const Cliente = require('./Cliente');
-const Status = require('./Status');
 const con = require('../../config/database/database');
+const Etapa = require('./Etapa');
 
-const Servico = con.define('TB_SERVICO', {
+const Servico = con.define('tb_servico', {
     titulo: {
         type: Sequelize.STRING,
         allowNull : false,
     },
     nros :{
         type: Sequelize.INTEGER,
-        allwNull: false
+        allowNull: false
     },
     descricao: {
         type: Sequelize.STRING,
@@ -28,12 +28,14 @@ const Servico = con.define('TB_SERVICO', {
         type : Sequelize.DATE,
         allowNull: false
     }
-});
+}, {freezeTableName: true});
+
 
 Servico.belongsTo(Cliente);
-Servico.hasMany(Status);
 
-//Servico.sync({force: true});
+const count = Servico.count().then(result => {console.log("Total de: " + result)});
+console.log(count)
+//Servico.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));
 
 module.exports = Servico;
 

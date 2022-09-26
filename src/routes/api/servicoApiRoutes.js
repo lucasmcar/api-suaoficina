@@ -4,8 +4,12 @@ const servicoController = require('../../controller/api/ServicoController');
 const router = express.Router();
 
 router
-    .route('/api/servicos')
-    .get(servicoController.todosServicos)
+    .route('/api/servicos/')
+    .get(servicoController.todosServicos);
+
+router
+    .route('/api/servico/novo')
+    .post(servicoController.cadastrarServico);
 
 router
     .route('/api/servico/:os')
@@ -13,8 +17,10 @@ router
 
 router
     .route('/api/servico/:veiculo')
-    .get(servicoController.servicoPorCarro)
-    .patch(servicoController.atualizarCliente)
-    .delete(servicoController.removerCliente);
+    .get(servicoController.servicoPorCarro);
+
+/*router
+    .route('/api/servico/etapa/:nros')
+    .get(servicoController.verEtapaServico);*/
 
 module.exports = router;

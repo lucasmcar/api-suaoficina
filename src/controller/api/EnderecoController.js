@@ -1,16 +1,14 @@
-const CarroClass = require('../../classes/Carro');
-const Carro = require('../../model/Carro');
-const Marca = require('../../model/Marca');
+const Endereco = require('../../model/Endereco');
 
-exports.verTodos = (req, res) =>{
-    Carro.findAll()
-    .then(carross => {
+exports.verEndereco = (req, res) =>{
+    Endereco.findAll()
+    .then(enderecos => {
         res.status = 200
-        res.json(carros);
+        res.json(enderecos);
     });
 };
 
-exports.verCarroPorPlaca = (req, res) =>{
+/*exports.verCarroPorPlaca = (req, res) =>{
     var placa = req.params.placa;
     const carroClass = new CarroClass();
     carroClass.Placa = placa
@@ -24,25 +22,9 @@ exports.verCarroPorPlaca = (req, res) =>{
     }).catch(err =>{
         console.log(err);
     });
-};
+};*/
 
-exports.verCarrosPorMarca = (req, res) =>{
-    var marca = req.params.marca;
-    Carro.findAll({
-        include: [{
-            model: Marca,
-            required: true,
-            where : { nome : marca }
-        }]
-    }).then(carro => {
-        res.statusCode = 200
-        res.json(carro); 
-    }).catch(err =>{
-        console.log(err);
-    });
-};
-
-exports.cadastrarCarro = (req, res) => {
+exports.cadastrarEndereco = (req, res) => {
     let {nome, cor, nrportas, tipo, ano, placa} = req.body;
     const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
         Carro.create({
@@ -58,5 +40,3 @@ exports.cadastrarCarro = (req, res) => {
         console.log(err);
     });     
 }
-
-//include: [{model: Brand,  attributes: ['name']}],

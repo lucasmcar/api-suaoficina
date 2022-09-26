@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 
 const con = require('../../config/database/database');
 
-const Cliente = require('./Cliente')
+const Cliente = require('./Cliente');
+const Marca = require('./Marca');
 
 const Carro = con.define('tb_carro', {
     nome: {
@@ -21,9 +22,19 @@ const Carro = con.define('tb_carro', {
         type: Sequelize.STRING,
         allowNull: false
     },
-});
+    ano: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    placa: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+}, {freezeTableName: true});
 
 Carro.belongsTo(Cliente);
-//Carro.sync({force: true});
+Carro.belongsTo(Marca);
+//Carro.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
 module.exports = Carro;

@@ -19,9 +19,9 @@ const Endereco = con.define('tb_endereco', {
         type: Sequelize.STRING,
 
     }
-});
+},  {freezeTableName: true});
 
 Endereco.belongsTo(Cliente);
-//Endereco.sync({force: true});
+//Endereco.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
 module.exports = Endereco;

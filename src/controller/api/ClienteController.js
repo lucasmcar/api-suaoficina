@@ -1,22 +1,24 @@
 const Cliente = require('../../model/Cliente');
+const ClienteClass = require('../../classes/Cliente')
 
 //Rota listagem de clientes
-exports.verClientes = (req, res) =>{
-    Cliente.findAll({
-        //include: [{model: Brand,  attributes: ['name']}],
-    })
-    .then(clientes => {
+exports.verClientes = async (req, res) =>{
+    Cliente.findAll().then((clientes)=>{
         res.status = 200
         res.json(clientes);
-    })
+    }).catch(err =>{
+        console.log(err)
+    });
 };
 
 //Listagem de cliente por id
 exports.verClientePeloId = (req, res) =>{
     var id = req.params.id;
+    const clienteClass = new ClienteClass();
+    clienteClass.Id = id
     Cliente.findOne({
         where: {
-            id: id
+            id: clienteClass.Id
         }
     }).then(cliente => {
         res.statusCode = 200
@@ -28,25 +30,18 @@ exports.verClientePeloId = (req, res) =>{
 
 //cadastro novo cliente
 exports.inserirCliente = (req, res) =>{
-    let {nome, email,celular} = req.body;
-        if(nome != undefined || nome != ""){
-            if(email != undefined || email != "") {
-                if(celular != undefined || celular != ""){
-                    Cliente.create({
-                        nome: nome,
-                        email: email,
-                        celular: celular,
-                    }).then(() => {
-                        res.redirect('/');
-                    }).catch(err =>{
-                        console.log(err);
-                    });
-                }
-                
-            }
-        } else {
-            res.redirect('/');
-        }
+    let {id, nome, email,celular} = req.body;
+        const clienteClass = new ClienteClass(id, nome, celular, email)
+            Cliente.create({
+                nome: clienteClass.Nome,
+                email: clienteClass.Email,
+                celular: clienteClass.Telefone,
+            }).then(() => {
+                res.statusCode = 200
+                res.json({"status": "ok", "result" : "Cliente cadastrado"});
+            }).catch(err =>{
+                console.log(err);
+            });
 }
 
 exports.atualizarCliente = (req, res) =>{

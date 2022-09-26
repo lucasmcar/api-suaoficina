@@ -1,12 +1,10 @@
 const Marca = require("../../model/Marca");
 
 exports.verMarcas = (req, res) =>{
-    Marca.findAll({
-        
-    })
-    .then(clientes => {
+    Marca.findAll()
+    .then(marcas => {
         res.status = 200
-        res.json(clientes);
+        res.json(marcas);
     })
 };
 

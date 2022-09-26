@@ -1,7 +1,11 @@
 const express = require('express');
-const clienteRouter = require('./src/routes/api/clienteApiRoutes');
-const servicoRouter = require('./src/routes/api/servicoApiRoutes');
-const statusRouter = require('./src/routes/api/statusApiRoutes');
+const clienteRouter = require('./src/routes/api/ClienteApiRoutes');
+const servicoRouter = require('./src/routes/api/ServicoApiRoutes');
+const etapaRouter = require('./src/routes/api/EtapaApiRoutes');
+const statusRouter = require('./src/routes/api/StatusApiRoutes');
+const carroRouter = require('./src/routes/api/CarroApiRoutes');
+const marcaRouter = require('./src/routes/api/MarcaApiRoutes');
+const enderecoRouter = require('./src/routes/api/EnderecoApiRoutes');
 const app = express();
 const MYSQL_DB = require('./config/database/database');
 const cors = require('cors');
@@ -14,9 +18,6 @@ app.use(express.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 const port = 4000;
 
-
-//const brandsController = require('./Controller/brands/BrandsController');
-
 MYSQL_DB
     .authenticate()
     .then(()=>{
@@ -25,9 +26,15 @@ MYSQL_DB
         console.log(err)
     });  
 
-app.use(clienteRouter)
-app.use(servicoRouter)
-app.use(statusRouter)
+MYSQL_DB.connection
+
+app.use(clienteRouter);
+app.use(servicoRouter);
+app.use(statusRouter);
+app.use(etapaRouter);
+app.use(carroRouter);
+app.use(marcaRouter);
+app.use(enderecoRouter);
 /*app.use(servicoController);
 app.use('/', carroController);
 app.use('/', marcaController);*/

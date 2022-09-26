@@ -7,11 +7,56 @@
     <title>Document</title>
 </head>
 <body>
+    <h2>Cadastro de cliente</h2>
     <form method="POST" action="/api/cliente/novo">
         <input type="text" name="nome" id="" placeholder="Seu nome">
         <input type="text" name="email" id="" placeholder="email">
         <input type="text" name="celular" id="" placeholder="celular">
         <button>Enviar</button>
     </form>
+
+    <hr>
+    <h2>Cadastro de serviço</h2>
+
+    <form method="POST" action="/api/servico/novo">
+        <input type="text" name="titulo" id="" placeholder="Titulo">
+        <input type="text" name="nros" id="" placeholder="Ordem de Servico">
+        <input type="text" name="descricao" id="" placeholder="descricao">
+        <input type="text" name="preco" id="" placeholder="0.00">
+        <input type="date" name="data_entrada" id="">
+        <input type="date" name="data_entrega" id="">
+        <button>Enviar</button>
+    </form>
+
+
+    <hr>
+
+    <h2>Cadastro de status</h2>
+
+    <form method="POST" action="/api/status/novo">
+        <input type="text" name="fase" id="" placeholder="fase">
+        
+        <button>Enviar</button>
+    </form>
+
+    <hr>
+
+    <!-- <h2>Cadastro de etapa</h2>
+
+    <form method="POST" action="/api/etapa/novo">
+        <input type="text" name="nome_etapa" id="" placeholder="nome">
+        <input type="text" name="descricao" id="" placeholder="Descrição da etapa">
+        <input type="date" name="data_entrada" id="" placeholder="">
+        <input type="date" name="data_saida" id="" placeholder="">
+        <input type="text" name="servicoId" id="" placeholder="fase">
+        <select>
+            <option value="" selected>Selecione</option>
+            <% //fase.forEach(f => { %> 
+                <option value="<%= //f.id %>"><%= //f.fase %></option>
+            <% //}) %>
+        </select>
+        
+        <button>Enviar</button>
+    </form> -->
 </body>
 </html>

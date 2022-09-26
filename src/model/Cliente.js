@@ -15,10 +15,10 @@ const Cliente = con.define('tb_cliente', {
         type: Sequelize.STRING,
         allowNull: false
     },
-});
+}, {freezeTableName: true});
 
 
 
-//Cliente.sync({force: true});
+//Cliente.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
 module.exports = Cliente;
