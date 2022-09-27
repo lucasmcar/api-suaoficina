@@ -1,7 +1,7 @@
-const Status = require("../../model/Status");
+//const Status = require("../../model/Status");
 
 exports.cadastrarStatus = (req, res) =>{
-    let {fase} = req.body;
+    /*let {fase} = req.body;
         if(fase != undefined || fase != ""){
             Status.create({
                 fase: fase
@@ -12,13 +12,13 @@ exports.cadastrarStatus = (req, res) =>{
             });
         } else {
             res.redirect('/');
-        }
+        }*/
 };
 
 exports.TrazerStatus = (req, res) => {
-    Status.findAll().then((fase) =>{
+    /*Status.findAll().then((fase) =>{
         res.render('teste', {fase})
-    });
+    });*/
 };
 
 exports.testePage = (req, res) =>{

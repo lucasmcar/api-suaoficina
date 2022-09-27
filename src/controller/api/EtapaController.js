@@ -7,13 +7,13 @@ exports.verEtapa = (req, res) =>{
 };
 
 exports.verEtapaPorServiço = (req, res) =>{
-    Etapas.findAll({
+    /*Etapas.findAll({
         //include: [{model: Brand,  attributes: ['name']}],
     })
     .then(etapas => {
         res.status = 200
         res.json(etapas);
-    })
+    })*/
 };
 
 exports.testePage = (req, res) =>{

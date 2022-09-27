@@ -1,11 +1,11 @@
-const Endereco = require('../../model/Endereco');
+//const Endereco = require('../../model/Endereco');
 
 exports.verEndereco = (req, res) =>{
-    Endereco.findAll()
+    /*Endereco.findAll()
     .then(enderecos => {
         res.status = 200
         res.json(enderecos);
-    });
+    });*/
 };
 
 /*exports.verCarroPorPlaca = (req, res) =>{
@@ -25,7 +25,7 @@ exports.verEndereco = (req, res) =>{
 };*/
 
 exports.cadastrarEndereco = (req, res) => {
-    let {nome, cor, nrportas, tipo, ano, placa} = req.body;
+    /*let {nome, cor, nrportas, tipo, ano, placa} = req.body;
     const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
         Carro.create({
         nome: carroClass.Nome,
@@ -38,5 +38,5 @@ exports.cadastrarEndereco = (req, res) => {
         res.status = 200;
     }).catch(err =>{
         console.log(err);
-    });     
+    });     */
 }

@@ -7,7 +7,6 @@ const carroRouter = require('./src/routes/api/CarroApiRoutes');
 const marcaRouter = require('./src/routes/api/MarcaApiRoutes');
 const enderecoRouter = require('./src/routes/api/EnderecoApiRoutes');
 const app = express();
-const MYSQL_DB = require('./config/database/database');
 const cors = require('cors');
 
 app.use(cors());
@@ -18,23 +17,14 @@ app.use(express.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 const port = 4000;
 
-MYSQL_DB
-    .authenticate()
-    .then(()=>{
-        console.log('Conectado ao banco');
-    }).catch(err =>{
-        console.log(err)
-    });  
-
-MYSQL_DB.connection
 
 app.use(clienteRouter);
-app.use(servicoRouter);
-app.use(statusRouter);
-app.use(etapaRouter);
+//app.use(servicoRouter);
+//app.use(statusRouter);
+//app.use(etapaRouter);
 app.use(carroRouter);
 app.use(marcaRouter);
-app.use(enderecoRouter);
+//app.use(enderecoRouter);
 /*app.use(servicoController);
 app.use('/', carroController);
 app.use('/', marcaController);*/

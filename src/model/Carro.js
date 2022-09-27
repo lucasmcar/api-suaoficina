@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+/* const Sequelize = require('sequelize');
 
 const con = require('../../config/database/database');
 
@@ -33,8 +33,8 @@ const Carro = con.define('tb_carro', {
 
 }, {freezeTableName: true});
 
-Carro.belongsTo(Cliente);
-Carro.belongsTo(Marca);
+//Carro.belongsTo(Cliente);
+//Carro.belongsTo(Marca);//
 //Carro.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
-module.exports = Carro;
+module.exports = Carro; */

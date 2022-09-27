@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+/* const Sequelize = require('sequelize');
 
 const con = require('../../config/database/database');
 
@@ -21,4 +21,4 @@ const Cliente = con.define('tb_cliente', {
 
 //Cliente.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
-module.exports = Cliente;
+module.exports = Cliente; */

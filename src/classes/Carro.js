@@ -1,11 +1,15 @@
+const Cliente = require("./Cliente");
+
 module.exports = class Carro {
 
-    constructor(nome, cor, nrportas, tipo, ano){
+    constructor(nome, cor, nrportas, tipo, ano, marca_id, cliente_id){
         this._nome = nome;
         this._cor = cor;
         this._nrportas = nrportas;
         this._tipo = tipo;
-        this._ano = ano
+        this._ano = ano;
+        this._marca_id = marca_id;
+        this._cliente_id = cliente_id;
     }
 
     set Nome(nome){
@@ -47,6 +51,21 @@ module.exports = class Carro {
     get Ano(){
         return this._ano;
     }
+
+    set MarcaId(marcaId){
+        this._marca_id = marcaId;
+    }
+
+    get MarcaId(){
+        return this._marca_id;
+    }
     
+    get ClienteId (){
+        return this._cliente_id
+    }
+
+    set ClienteId(clienteId){
+        this._cliente_id = clienteId;
+    }
 
 }

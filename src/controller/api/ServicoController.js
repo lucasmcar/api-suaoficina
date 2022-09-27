@@ -1,10 +1,10 @@
-const Etapa = require('../../model/Etapa');
-const Servico = require('../../model/Servico');
-const Status = require('../../model/Status');
+//const Etapa = require('../../classe/Etapa');
+//const Servico = require('../../model/Servico');
+//const Status = require('../../model/Status');
 
 
 exports.cadastrarServico = (req, res) => {
-    let {titulo, descricao, data_entrada, data_entrega} = req.body;
+    /*let {titulo, descricao, data_entrada, data_entrega} = req.body;
     var nros = parseInt(req.body.nros);
     var preco = parseFloat(req.body.preco);
         if(titulo != undefined || titulo != ""){
@@ -27,17 +27,17 @@ exports.cadastrarServico = (req, res) => {
             }
         } else {
             res.redirect('/');
-        }
+        }*/
 }
 
 
 exports.todosServicos = (req, res)=>{
-    Servico.findAll().then((servicos)=>{
+    /*Servico.findAll().then((servicos)=>{
         res.status = 200
         res.json(servicos);
     }).catch(err =>{
         console.log(err)
-    });
+    });*/
 }
 
 exports.servicoPorOS = (req, res) =>{

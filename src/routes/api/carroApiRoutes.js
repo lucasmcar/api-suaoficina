@@ -15,9 +15,7 @@ router
     .get(carroController.verCarrosPorMarca);
 
 router
-    .route('/api/carro/')
+    .route('/api/carros/')
     .get(carroController.verTodos);
-
-
 
 module.exports = router;

@@ -1,62 +1,48 @@
 const CarroClass = require('../../classes/Carro');
-const Carro = require('../../model/Carro');
-const Marca = require('../../model/Marca');
+const MarcaClass = require('../../classes/Marca');
+const con = require("../../../config/database/db");
 
+//consulta todos os veiculos
 exports.verTodos = (req, res) =>{
-    Carro.findAll()
-    .then(carross => {
-        res.status = 200
-        res.json(carros);
+    con.query('SELECT * FROM tb_carro', (err, results) =>{
+        if(err) {throw err}
+        res.statusCode = 200;
+        res.json(results);
     });
 };
 
+//consulta carro placa
 exports.verCarroPorPlaca = (req, res) =>{
     var placa = req.params.placa;
     const carroClass = new CarroClass();
     carroClass.Placa = placa
-    Carro.findOne({
-        where: {
-            placa: carroClass.Placa
-        }
-    }).then(carro => {
-        res.statusCode = 200
-        res.json(carro); 
-    }).catch(err =>{
-        console.log(err);
+    con.query('SELECT nome FROM tb_carro WHERE placa = ?', [carroClass.Placa], (err, results) =>{
+        if(err) {throw err}
+        res.statusCode = 200;
+        res.json(results);
     });
 };
 
+//consulta carro pela marca
 exports.verCarrosPorMarca = (req, res) =>{
     var marca = req.params.marca;
-    Carro.findAll({
-        include: [{
-            model: Marca,
-            required: true,
-            where : { nome : marca }
-        }]
-    }).then(carro => {
-        res.statusCode = 200
-        res.json(carro); 
-    }).catch(err =>{
-        console.log(err);
+    const marcaClass = new MarcaClass( null ,marca);
+    con.query('SELECT c.nome as veiculo, m.nome as marca  FROM tb_carro c INNER JOIN tb_marca m on c.marca_id= m.id WHERE m.nome = ?', 
+    [marcaClass.Nome], (err, results) =>{
+        if(err) {console.log(err);}
+        res.statusCode = 200;
+        res.json(results);
     });
 };
 
 exports.cadastrarCarro = (req, res) => {
-    let {nome, cor, nrportas, tipo, ano, placa} = req.body;
-    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
-        Carro.create({
-        nome: carroClass.Nome,
-        cor: carroClass.Cor,
-        nrportas: carroClass.NrPortas,
-        tipo: carroClass.Tipo,
-        ano: carroClass.Ano,
-        placa: carroClass.Placa 
-    }).then(() => {
-        res.status = 200;
-    }).catch(err =>{
-        console.log(err);
-    });     
+    let {nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id} = req.body;
+    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id);
+    con.query('INSERT INTO tb_carro (nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+    [carroClass.Nome, carroClass.Cor, carroClass.NrPortas, carroClass.Tipo, carroClass.Ano, carroClass.placa, carroClass.MarcaId, carroClass.ClienteId], 
+    (err, results) =>{
+        if(err){throw err};
+        res.statusCode = 200;
+        res.json(results);
+    });   
 }
-
-//include: [{model: Brand,  attributes: ['name']}],

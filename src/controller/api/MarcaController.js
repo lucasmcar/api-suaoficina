@@ -1,15 +1,15 @@
-const Marca = require("../../model/Marca");
+const Marca = require("../../classes/Marca");
 
 exports.verMarcas = (req, res) =>{
-    Marca.findAll()
+    /*Marca.findAll()
     .then(marcas => {
         res.status = 200
         res.json(marcas);
-    })
+    })*/
 };
 
 exports.verMarcaPorId = (req, res) =>{
-    var id = req.params.id;
+    /*var id = req.params.id;
     Marca.findOne({
         where: {
             id: id
@@ -19,5 +19,5 @@ exports.verMarcaPorId = (req, res) =>{
         res.json(marca); 
     }).catch(err =>{
         console.log(err);
-    })
+    })*/
 }

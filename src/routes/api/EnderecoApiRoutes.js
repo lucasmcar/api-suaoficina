@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const enderecoController = require('../../controller/api/EnderecoController');
 
 const router = express.Router();
@@ -13,4 +13,4 @@ router
 
 
 
-module.exports = router;
+module.exports = router; */

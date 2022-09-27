@@ -1,19 +1,18 @@
-const Cliente = require('../../model/Cliente');
 const ClienteClass = require('../../classes/Cliente')
 
 //Rota listagem de clientes
 exports.verClientes = async (req, res) =>{
-    Cliente.findAll().then((clientes)=>{
+    /*Cliente.findAll().then((clientes)=>{
         res.status = 200
         res.json(clientes);
     }).catch(err =>{
         console.log(err)
-    });
+    });*/
 };
 
 //Listagem de cliente por id
 exports.verClientePeloId = (req, res) =>{
-    var id = req.params.id;
+    /*var id = req.params.id;
     const clienteClass = new ClienteClass();
     clienteClass.Id = id
     Cliente.findOne({
@@ -25,12 +24,12 @@ exports.verClientePeloId = (req, res) =>{
         res.json(cliente); 
     }).catch(err =>{
         console.log(err);
-    });
+    });*/
 }
 
 //cadastro novo cliente
 exports.inserirCliente = (req, res) =>{
-    let {id, nome, email,celular} = req.body;
+    /*let {id, nome, email,celular} = req.body;
         const clienteClass = new ClienteClass(id, nome, celular, email)
             Cliente.create({
                 nome: clienteClass.Nome,
@@ -41,7 +40,7 @@ exports.inserirCliente = (req, res) =>{
                 res.json({"status": "ok", "result" : "Cliente cadastrado"});
             }).catch(err =>{
                 console.log(err);
-            });
+            });*/
 }
 
 exports.atualizarCliente = (req, res) =>{
