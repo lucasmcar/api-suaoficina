@@ -37,12 +37,46 @@ exports.verCarrosPorMarca = (req, res) =>{
 
 exports.cadastrarCarro = (req, res) => {
     let {nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id} = req.body;
-    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id);
+    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
+    carroClass.MarcaId = marca_id;
+    carroClass.ClienteId = cliente_id;
     con.query('INSERT INTO tb_carro (nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
     [carroClass.Nome, carroClass.Cor, carroClass.NrPortas, carroClass.Tipo, carroClass.Ano, carroClass.placa, carroClass.MarcaId, carroClass.ClienteId], 
     (err, results) =>{
-        if(err){throw err};
+        if(err){throw err;}
         res.statusCode = 200;
         res.json(results);
     });   
+}
+
+exports.editarCarro = (req, res) => {
+    let {nome, cor, nrportas, tipo, ano, placa} = req.body;
+    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
+    carroClass.Placa = placa;
+    nrportas = parseInt(nrportas);
+    if(placa != undefined && (nome != undefined || 
+        cor != undefined || 
+        nrportas != 0 || tipo != undefined)){
+        con.query('UPDATE tb_carro SET nome = ?, cor = ?, nrportas = ?, tipo = ?, ano = ? WHERE placa = ?', 
+        [carroClass.Nome, carroClass.Cor, carroClass.NrPortas, carroClass.Tipo, carroClass.Ano, carroClass.Placa], 
+        (err, results) => {
+            if(err){throw err;}
+            res.statusCode = 200;
+            res.json(results.affectedRows)
+        });
+    }   
+}
+
+exports.apagarCarro = (req, res) => {
+    let placa = req.body.placa;
+    const carroClass = new CarroClass(null, null, null, null, null, placa);
+    carroClass.Placa = placa;
+    if(placa != undefined){
+        con.query('DELETE FROM tb_carro WHERE placa = ?', [carroClass.Placa],
+        (err, results) =>{
+            if(err){ throw err;}
+            res.statusCode = 200;
+            res.json(results.affectedRows)
+        });
+    }
 }

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const con = require('../../config/database/database');
-const Carro = require('./Carro');
+/*const Carro = require('./Carro');
 
 const Marca = con.define('tb_marca', {
     nome: {
@@ -16,4 +16,4 @@ const Marca = con.define('tb_marca', {
 
 //Marca.sync({force: true}).then(result => console.log(result)).catch(err => console.log(err));;
 
-module.exports = Marca;
+module.exports = Marca;*/

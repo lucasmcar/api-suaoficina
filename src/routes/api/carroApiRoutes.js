@@ -9,7 +9,10 @@ router
 
 router
     .route('/api/carro/:placa')
-    .get(carroController.verCarroPorPlaca);
+    .get(carroController.verCarroPorPlaca)
+    .put(carroController.editarCarro)
+    .delete(carroController.apagarCarro);~
+    
 router
     .route('/api/carro/marca/:marca')
     .get(carroController.verCarrosPorMarca);
