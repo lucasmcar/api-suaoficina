@@ -1,30 +1,24 @@
 const ClienteClass = require('../../classes/Cliente')
+const con = require("../../../config/database/db");
 
 //Rota listagem de clientes
 exports.verClientes = async (req, res) =>{
-    /*Cliente.findAll().then((clientes)=>{
-        res.status = 200
-        res.json(clientes);
-    }).catch(err =>{
-        console.log(err)
-    });*/
+    con.query('SELECT * FROM tb_cliente', (err, results) =>{
+        if(err) {throw err}
+        res.statusCode = 200;
+        res.json(results);
+    });
 };
 
 //Listagem de cliente por id
 exports.verClientePeloId = (req, res) =>{
-    /*var id = req.params.id;
-    const clienteClass = new ClienteClass();
-    clienteClass.Id = id
-    Cliente.findOne({
-        where: {
-            id: clienteClass.Id
-        }
-    }).then(cliente => {
-        res.statusCode = 200
-        res.json(cliente); 
-    }).catch(err =>{
-        console.log(err);
-    });*/
+    var id = req.params.id;
+    const clienteClass = new ClienteClass(id);
+    con.query('SELECT * FROM tb_cliente WHERE id = ?', [clienteClass.Id], (err, results) =>{
+        if(err) {throw err}
+        res.statusCode = 200;
+        res.json(results);
+    });
 }
 
 //cadastro novo cliente
