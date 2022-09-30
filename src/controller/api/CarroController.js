@@ -80,3 +80,13 @@ exports.apagarCarro = (req, res) => {
         });
     }
 }
+
+exports.retornaTotalCarros = (req, res) =>{
+    con.query('select count(nome) as total from tb_carro'),
+    (err, results) => {
+        if(err){throw err;}
+        res.statusCode = 200
+        console.log(results);
+        res.json(results);
+    }
+}

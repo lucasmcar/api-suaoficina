@@ -12,7 +12,7 @@ router
     .get(carroController.verCarroPorPlaca)
     .put(carroController.editarCarro)
     .delete(carroController.apagarCarro);~
-    
+
 router
     .route('/api/carro/marca/:marca')
     .get(carroController.verCarrosPorMarca);
@@ -20,5 +20,8 @@ router
 router
     .route('/api/carros/')
     .get(carroController.verTodos);
+router
+    .route('/api/carro/total/')
+    .get(carroController.retornaTotalCarros);
 
 module.exports = router;
