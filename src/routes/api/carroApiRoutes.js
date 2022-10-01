@@ -20,8 +20,13 @@ router
 router
     .route('/api/carros/')
     .get(carroController.verTodos);
+
 router
-    .route('/api/carro/total/')
+    .route('/api/nrcarros/')
     .get(carroController.retornaTotalCarros);
+
+router
+    .route('/api/nrcarros/:nome')
+    .get(carroController.retornaTotalCarrosPorCliente);
 
 module.exports = router;

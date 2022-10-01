@@ -1,5 +1,7 @@
 const CarroClass = require('../../classes/Carro');
 const MarcaClass = require('../../classes/Marca');
+const ClienteClass = require('../../classes/Cliente');
+
 const con = require("../../../config/database/db");
 
 //consulta todos os veiculos
@@ -73,7 +75,7 @@ exports.apagarCarro = (req, res) => {
     carroClass.Placa = placa;
     if(placa != undefined){
         con.query('DELETE FROM tb_carro WHERE placa = ?', [carroClass.Placa],
-        (err, results) =>{
+        (err, results) => {
             if(err){ throw err;}
             res.statusCode = 200;
             res.json(results.affectedRows)
@@ -82,11 +84,21 @@ exports.apagarCarro = (req, res) => {
 }
 
 exports.retornaTotalCarros = (req, res) =>{
-    con.query('select count(nome) as total from tb_carro'),
-    (err, results) => {
+    con.query('select count(*) as total from tb_carro', (err, results) => {
         if(err){throw err;}
         res.statusCode = 200
-        console.log(results);
+      res.json(results);
+    });
+}
+
+exports.retornaTotalCarrosPorCliente = (req, res) => {
+    let nomeCliente = req.params.nome;
+    const clienteClass = new ClienteClass(null, nomeCliente)
+    con.query("SELECT count(c.nome) as total_carros, cl.nome as proprietario from tb_carro c inner join tb_cliente cl on c.cliente_id = cl.id where cl.nome like ?", 
+    ['%'+ clienteClass.Nome +'%'],
+    (err, results)=>{
+        if(err){throw err;}
+        res.statusCode = 200;
         res.json(results);
-    }
+    });
 }
