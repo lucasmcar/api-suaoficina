@@ -1,12 +1,12 @@
-const CarroClass = require('../../classes/Carro');
+const carroObj = require('../../classes/Carro')
 const MarcaClass = require('../../classes/Marca');
 const ClienteClass = require('../../classes/Cliente');
 
 const con = require("../../../config/database/db");
-
+const TABLE_NAME = 'carro';
 //consulta todos os veiculos
 exports.verTodos = (req, res) =>{
-    con.query('SELECT * FROM tb_carro', (err, results) =>{
+    con.query('SELECT * FROM ' + TABLE_NAME , (err, results) =>{
         if(err) {throw err}
         res.statusCode = 200;
         res.json(results);
@@ -16,9 +16,8 @@ exports.verTodos = (req, res) =>{
 //consulta carro placa
 exports.verCarroPorPlaca = (req, res) =>{
     var placa = req.params.placa;
-    const carroClass = new CarroClass();
-    carroClass.Placa = placa
-    con.query('SELECT nome FROM tb_carro WHERE placa = ?', [carroClass.Placa], (err, results) =>{
+    carroObj.Placa = placa
+    con.query('SELECT nome, nrportas, cor, ano, placa FROM '+ TABLE_NAME +' WHERE placa LIKE ?', ['%'+ carroObjss.Placa + '%'], (err, results) =>{
         if(err) {throw err}
         res.statusCode = 200;
         res.json(results);
@@ -29,7 +28,7 @@ exports.verCarroPorPlaca = (req, res) =>{
 exports.verCarrosPorMarca = (req, res) =>{
     var marca = req.params.marca;
     const marcaClass = new MarcaClass( null ,marca);
-    con.query('SELECT c.nome as veiculo, m.nome as marca  FROM tb_carro c INNER JOIN tb_marca m on c.marca_id= m.id WHERE m.nome = ?', 
+    con.query('SELECT c.nome as veiculo, m.nome as marca  FROM '+ TABLE_NAME + ' c INNER JOIN tb_marca m on c.marca_id= m.id WHERE m.nome = ?', 
     [marcaClass.Nome], (err, results) =>{
         if(err) {console.log(err);}
         res.statusCode = 200;
@@ -38,12 +37,16 @@ exports.verCarrosPorMarca = (req, res) =>{
 };
 
 exports.cadastrarCarro = (req, res) => {
-    let {nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id} = req.body;
-    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
-    carroClass.MarcaId = marca_id;
-    carroClass.ClienteId = cliente_id;
-    con.query('INSERT INTO tb_carro (nome, cor, nrportas, tipo, ano, placa, marca_id, cliente_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-    [carroClass.Nome, carroClass.Cor, carroClass.NrPortas, carroClass.Tipo, carroClass.Ano, carroClass.placa, carroClass.MarcaId, carroClass.ClienteId], 
+    let {nome, cor, nrportas, tipo, ano, placa, idmarca, idproprietario} = req.body;
+        /*nome = carroObj.Nome;
+        cor = carroObj.Cor;
+        nrportas = carroObj*/
+
+    carroObj = {nome, cor, nrportas, tipo, ano, placa, idmarca, idproprietario}
+    carroObj.MarcaId = marca_id;
+    carroObj.ClienteId = cliente_id;
+    con.query('INSERT INTO ' + TABLE_NAME +' (nmveiculo, nrportas, placa, cor, ano, tipo, idmarca, idproprietario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+    [carroObj.Nome, carroObj.Cor, carroObj.NrPortas, carroObj.Tipo, carroObj.Cor, carroObj.Ano, carroObj.placa, carroObj.MarcaId, carroObj.ClienteId], 
     (err, results) =>{
         if(err){throw err;}
         res.statusCode = 200;
@@ -53,14 +56,14 @@ exports.cadastrarCarro = (req, res) => {
 
 exports.editarCarro = (req, res) => {
     let {nome, cor, nrportas, tipo, ano, placa} = req.body;
-    const carroClass = new CarroClass(nome, cor, nrportas, tipo, ano, placa);
-    carroClass.Placa = placa;
+    const carroObjss = new carroObjss(nome, cor, nrportas, tipo, ano, placa);
+    carroObjss.Placa = placa;
     nrportas = parseInt(nrportas);
     if(placa != undefined && (nome != undefined || 
         cor != undefined || 
         nrportas != 0 || tipo != undefined)){
-        con.query('UPDATE tb_carro SET nome = ?, cor = ?, nrportas = ?, tipo = ?, ano = ? WHERE placa = ?', 
-        [carroClass.Nome, carroClass.Cor, carroClass.NrPortas, carroClass.Tipo, carroClass.Ano, carroClass.Placa], 
+        con.query('UPDATE '+ TABLE_NAME +' SET nome = ?, cor = ?, nrportas = ?, tipo = ?, ano = ? WHERE placa = ?', 
+        [carroObjss.Nome, carroObjss.Cor, carroObjss.NrPortas, carroObjss.Tipo, carroObjss.Ano, carroObjss.Placa], 
         (err, results) => {
             if(err){throw err;}
             res.statusCode = 200;
@@ -71,10 +74,10 @@ exports.editarCarro = (req, res) => {
 
 exports.apagarCarro = (req, res) => {
     let placa = req.body.placa;
-    const carroClass = new CarroClass(null, null, null, null, null, placa);
-    carroClass.Placa = placa;
+    const carroObjss = new carroObjss(null, null, null, null, null, placa);
+    carroObjss.Placa = placa;
     if(placa != undefined){
-        con.query('DELETE FROM tb_carro WHERE placa = ?', [carroClass.Placa],
+        con.query('DELETE FROM '+ TABLE_NAME +' WHERE placa = ?', [carroObjss.Placa],
         (err, results) => {
             if(err){ throw err;}
             res.statusCode = 200;
@@ -84,7 +87,7 @@ exports.apagarCarro = (req, res) => {
 }
 
 exports.retornaTotalCarros = (req, res) =>{
-    con.query('select count(*) as total from tb_carro', (err, results) => {
+    con.query('select count(*) as total from '+ TABLE_NAME, (err, results) => {
         if(err){throw err;}
         res.statusCode = 200
       res.json(results);
@@ -94,7 +97,7 @@ exports.retornaTotalCarros = (req, res) =>{
 exports.retornaTotalCarrosPorCliente = (req, res) => {
     let nomeCliente = req.params.nome;
     const clienteClass = new ClienteClass(null, nomeCliente)
-    con.query("SELECT count(c.nome) as total_carros, cl.nome as proprietario from tb_carro c inner join tb_cliente cl on c.cliente_id = cl.id where cl.nome like ?", 
+    con.query("SELECT count(c.nome) as total_carroObjcl.nome as proprietario from "+ TABLE_NAME +" c inner join tb_cliente cl on c.cliente_id = cl.id where cl.nome like ?", 
     ['%'+ clienteClass.Nome +'%'],
     (err, results)=>{
         if(err){throw err;}

@@ -1,5 +1,6 @@
 const express = require('express');
 const clienteRouter = require('./src/routes/api/ClienteApiRoutes');
+const oficinaRouter = require('./src/routes/api/OficinaApiRoutes');
 const servicoRouter = require('./src/routes/api/ServicoApiRoutes');
 const etapaRouter = require('./src/routes/api/EtapaApiRoutes');
 const statusRouter = require('./src/routes/api/StatusApiRoutes');

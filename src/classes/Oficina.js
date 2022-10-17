@@ -1,20 +1,10 @@
-const Foto = require('./Foto');
+module.exports = class Oficina {
 
-module.exports = class Serviço {
-
-    constructor(id = null,  titulo, descricao, tipo,  preco, dtentrada, nrdias, dtEntrga){
-        this._fotos = [];
-        this._titulo = titulo;
-        this._edescricao = descricao;
-        this._tipo = tipo;
-        this._preco = preco;
-        this._dtEntrada = dtentrada;
-        this._nrDias = nrdias;
-        this._dtEntrega = dtentrega;
-    }
-
-    set Fotos(foto){
-        let f = new Foto
+    constructor(id = null, nome, codigo, email, cnpj){
+        this._nome = nome;
+        this._codigo = codigo;
+        this._email = email;
+        this._cnpj = cnpj;
     }
 
     set Id(id){

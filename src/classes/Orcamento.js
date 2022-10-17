@@ -1,6 +1,6 @@
 const Foto = require('./Foto');
 
-module.exports = class Serviço {
+module.exports = class Orcamento  {
 
     constructor(id = null,  titulo, descricao, tipo,  preco, dtentrada, nrdias, dtEntrga){
         this._fotos = [];
